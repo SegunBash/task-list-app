@@ -25,6 +25,7 @@ function addItem(e){
   //Get DOM elements
   const inputField = document.querySelector('.input-field');
   const taskList = document.querySelector('.task-list');
+  if(inputField.value!= ''){
   const li = document.createElement('li');
 
   //Construct task item and append
@@ -32,6 +33,9 @@ function addItem(e){
   li.innerHTML = `<a href="#" class="task">${inputField.value}</a><i class="fas fa-edit"></i><i class="far fa-trash-alt"></i>`;
   taskList.appendChild(li);
   inputField.value = '';
+}else {
+  showError('Please enter a task');
+}
 
   e.preventDefault();
 }
@@ -58,4 +62,27 @@ function editItem(e){
     (e.target.previousElementSibling.textContent);
     e.target.parentElement.remove();
   }
+}
+
+//Display Error
+function showError(err) {
+  //Get DOM elements
+  const card = document.querySelector('.container');
+  const heading = document.querySelector('h2');
+
+  //Create a div
+  const errorDiv = document.createElement('div');
+  //Add a class
+  errorDiv.className = 'danger-alert';
+  //Create error message and append to div
+  errorDiv.appendChild(document.createTextNode(err));
+  //Insert error Div into the DOM
+  card.insertBefore(errorDiv, heading);
+
+  setTimeout(clearError, 3000);
+}
+
+//Clear error after 3secs
+function clearError(){
+  document.querySelector('.danger-alert').remove();
 }
