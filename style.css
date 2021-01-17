@@ -95,7 +95,8 @@ h3 {
   flex-grow: 3;
 }
 
-.danger-alert {
+.danger-alert,
+.success-alert {
   background-color: var(--light-color);
   color: rgb(82, 1, 1);
   font-weight: bold;
@@ -105,6 +106,10 @@ h3 {
   padding: 0.8em 0.75em;
   border-radius: 5px;
   text-align: center;
+}
+
+.success-alert {
+  color: rgb(1, 31, 1);
 }
 
 @media only screen and (max-width: 768px) {

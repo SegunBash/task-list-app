@@ -54,12 +54,14 @@ function addItem(e){
   li.className = 'task-item';
   li.innerHTML = `<a href="#" class="task">${inputField.value}</a><i class="fas fa-edit"></i><i class="far fa-trash-alt"></i>`;
   taskList.appendChild(li);
+  showSuccess('Task has been added!');
+
   //Call the store task in local storage function
   storeTaskInLocalStorage(inputField.value);
   //Clear input field
   inputField.value = '';
 }else {
-  showError('Please enter a task');
+  showError('Please enter a task!');
 }
 
   e.preventDefault();
@@ -94,6 +96,7 @@ function storeTaskInLocalStorage(task) {
 function deleteItem(e){
   if(e.target.classList.contains('fa-trash-alt')) {
     e.target.parentElement.remove();
+    showError('Task removed!');
 
     deleteTaskFromLocalStorage(e.target.parentElement);
   }
@@ -131,6 +134,28 @@ function deleteTaskFromLocalStorage(taskItem){
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+//Display success msg
+function showSuccess(msg) {
+  //Get DOM elements
+  const card = document.querySelector('.container');
+  const heading = document.querySelector('h2');
+
+  //Create a div
+  const successDiv = document.createElement('div');
+  //Add a class
+  successDiv.className = 'success-alert';
+  //Create error message and append to div
+  successDiv.appendChild(document.createTextNode(msg));
+  //Insert error Div into the DOM
+  card.insertBefore(successDiv, heading);
+
+  setTimeout(clearMsg, 1000);
+}
+
+//Clear successMsg after 1sec
+function clearMsg(){
+  document.querySelector('.success-alert').remove();
+}
 
 
 //Display Error
@@ -148,10 +173,10 @@ function showError(err) {
   //Insert error Div into the DOM
   card.insertBefore(errorDiv, heading);
 
-  setTimeout(clearError, 3000);
+  setTimeout(clearError, 2000);
 }
 
-//Clear error after 3secs
+//Clear error after 2secs
 function clearError(){
   document.querySelector('.danger-alert').remove();
 }
