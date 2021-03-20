@@ -152,7 +152,7 @@ function showSuccess(msg) {
   setTimeout(clearMsg, 1000);
 }
 
-//Clear successMsg after 1sec
+//Clear successmessage after 1sec
 function clearMsg(){
   document.querySelector('.success-alert').remove();
 }
